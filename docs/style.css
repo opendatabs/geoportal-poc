@@ -1,0 +1,61 @@
+/* Allgemeine Stile */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header-Stile */
+header {
+    background: #0073e6;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+/* Hauptbereich */
+main {
+    padding: 20px;
+}
+
+#thema-section {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#thema-title {
+    font-size: 1.8em;
+    color: #0073e6;
+}
+
+#thema-description {
+    margin-top: 10px;
+}
+
+#thema-eben-list, #thema-links-list {
+    list-style: none;
+    padding: 0;
+}
+
+#thema-eben-list li, #thema-links-list li {
+    margin: 5px 0;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}

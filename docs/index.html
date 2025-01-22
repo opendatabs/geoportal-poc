@@ -1,12 +1,42 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geodaten Shop</title>
+    <!-- Link zur CSS-Datei -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Willkommen zum Geodaten-Shop</h1>
-    <p>Diese Seite wird dynamisch Inhalte basierend auf JSON-Daten laden.</p>
+    <header>
+        <h1>Geodaten Shop</h1>
+        <p>Willkommen auf der dynamischen Seite für Themenpräsentation.</p>
+    </header>
+
+    <main>
+        <!-- Dynamische Darstellung des Themas -->
+        <section id="thema-section">
+            <h2 id="thema-title">Lädt Thema...</h2>
+            <img id="thema-image" src="" alt="Bild des Themas" style="display: none;">
+            <p id="thema-description">Beschreibung wird geladen...</p>
+
+            <div id="thema-details">
+                <h3>Ebenen</h3>
+                <ul id="thema-eben-list"></ul>
+
+                <h3>Links</h3>
+                <ul id="thema-links-list"></ul>
+            </div>
+
+            <p id="last-updated">Letzte Aktualisierung: <span id="update-date">wird geladen...</span></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Geodaten Shop</p>
+    </footer>
+
+    <!-- Link zur JavaScript-Datei -->
+    <script src="script.js"></script>
 </body>
 </html>
