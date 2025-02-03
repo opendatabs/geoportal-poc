@@ -26,7 +26,7 @@ async function fetchData(abbreviation) {
         const data = await response.json();
 
         // Finde das passende Thema anhand der Abkürzung (Abkuerzung in der API)
-        console.log(abbreviation)
+        console.log(abbreviation);
         return data.find(item => item["abkuerzung"] === abbreviation);
     } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
@@ -54,30 +54,72 @@ function renderData(data) {
         ebenList.appendChild(li);
     });
 
-    // Links
+    // Links mit Symbolen
     const linksList = document.getElementById("thema-links-list");
     linksList.innerHTML = ""; // Vorherige Inhalte löschen
-    const links = ["geodaten-shop", "metadaten", "wms", "wfs", "wmts"];
+    const links = ["geodaten_shop", "metadaten", "mapbs", "geobasisdaten", "wms", "wfs", "wmts"];
+    const icons = {
+        "geodaten_shop": "shopping_cart", // Material Icon für Geodaten-Shop
+        "metadaten": "description", // Material Icon für Metadaten
+        "mapbs": "map", // Material Icon für MapBS
+        "geobasisdaten": "gavel", // Material Icon für Geobasisdaten
+        "wms": "public", // Material Icon für WMS
+        "wfs": "public", // Material Icon für WFS
+        "wmts": "public" // Material Icon für WMTS
+    };
+
     links.forEach(linkType => {
         if (data[linkType]) {
             const li = document.createElement("li");
+
+            // Symbol hinzufügen
+            const iconSpan = document.createElement("span");
+            iconSpan.className = "material-icons";
+            iconSpan.textContent = icons[linkType] || "link"; // Fallback-Icon
+
+            // Link hinzufügen
             const a = document.createElement("a");
             a.href = data[linkType];
-            a.textContent = linkType;
+            a.textContent = linkType.replace("_", " "); // Ersetze "_" durch Leerzeichen für Lesbarkeit
             a.target = "_blank";
-            li.appendChild(a);
+
+            li.appendChild(iconSpan); // Icon hinzufügen
+            li.appendChild(a); // Link hinzufügen
             linksList.appendChild(li);
         }
     });
+
+    // Zugriff-Link (Kategorie + URL + Schloss-Icon)
+    if (data["zugriff"] && data["zugriff"].includes(":")) {
+        const [category, url] = data["zugriff"].split(":").map(s => s.trim());
+        const li = document.createElement("li");
+
+        // Symbol für Kategorie hinzufügen
+        const iconSpan = document.createElement("span");
+        iconSpan.className = "material-icons category-icon";
+        iconSpan.textContent = category === "Kategorie A" ? "lock_open" : "lock";
+
+        // Link hinzufügen
+        const a = document.createElement("a");
+        a.href = url;
+        a.textContent = category;
+        a.target = "_blank";
+
+        li.appendChild(iconSpan); // Icon hinzufügen
+        li.appendChild(a); // Link hinzufügen
+        linksList.appendChild(li);
+    }
 
     // Aktualisierungsdatum
     document.getElementById("update-date").textContent = data["aktualisierung"];
 
     // Bild
     const img = document.getElementById("thema-image");
-    if (data["bild-url"]) {
-        img.src = data["bild-url"];
+    if (data["bild_url"]) {
+        img.src = data["bild_url"];
         img.style.display = "block";
+        img.style.maxWidth = "400px"; // Bildbreite begrenzen
+        img.style.height = "auto"; // Verhältnis beibehalten
     } else {
         img.style.display = "none";
     }
