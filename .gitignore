@@ -29,6 +29,7 @@ __pycache__/
 **/*.prj
 **/*.cpg
 **/*.json
+!config.json
 **/*.gpkg
 /aue_fischereistatistik/**/*.geojson
 /bachapp/**/*.geojson
