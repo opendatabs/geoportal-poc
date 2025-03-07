@@ -12,10 +12,10 @@ async function getApiKey() {
     }
 }
 
-// Funktion: URL-Parameter auslesen
+// Funktion: URL-Parameter auslesen und in Kleinbuchstaben umwandeln
 function getUrlParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
+    return urlParams.get(param)?.toLowerCase(); // Umwandlung in Kleinbuchstaben
 }
 
 // Funktion: Daten von der API abrufen
@@ -25,13 +25,13 @@ async function fetchData(abbreviation) {
         const response = await fetch(`${API_URL}?apikey=${apiKey}`);
         const data = await response.json();
 
-        // Finde das passende Thema anhand der Abkürzung (Abkuerzung in der API)
-        console.log(abbreviation);
-        return data.find(item => item["abkuerzung"] === abbreviation);
+        // Vergleich: API-Daten ebenfalls in Kleinbuchstaben umwandeln
+        return data.find(item => item["abkuerzung"].toLowerCase() === abbreviation);
     } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
     }
 }
+
 
 // Funktion: Daten in die Seite einfügen
 function renderData(data) {
